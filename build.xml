@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JUnit testing by NouR , Aya and Anwar" default="test">
+
+	<path id="NecessaryLibraries">
+	<pathelement location="./MyLibraries/hamcrest.jar"/>
+	<pathelement location="./MyLibraries/junit.jar"/>
+  <pathelement location="./MyLibraries/selenium-server-standalone-3.8.1.jar"/>
+</path>
+	
+
+	<target name="compile">
+		<mkdir dir="compilingFiles"/>
+		<javac srcdir="./src" destdir="./compilingFiles" debug="true"  includeantruntime="false" >
+			<classpath>
+				<path refid="NecessaryLibraries"/>
+				<pathelement location="./compilingFiles"/>
+			</classpath>
+		</javac>
+	</target>
+
+		
+<target name="test" depends= "compile">
+		<junit printsummary="on" haltonfailure="true" fork="true">
+			<test name="TestFacebookWithJUnit"/>
+			<classpath>
+				<path refid="NecessaryLibraries"/>
+				<pathelement location="compilingFiles"/>
+			</classpath>
+			<formatter type="brief" usefile="false"/>
+			<batchtest>
+				<fileset dir="compilingFiles" includes="**/*JUnit.class">
+					</fileset>
+			</batchtest>
+
+		</junit>
+	</target>
+
+</project>
